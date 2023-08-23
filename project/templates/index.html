@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+			rel="stylesheet"
+		/>
+		<style>
+			* {
+				font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont,
+					"Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+					"Helvetica Neue", sans-serif;
+			}
+			#Year {
+				height: 55px;
+				width: 98%;
+				border: 1px solid grey;
+			}
+			body {
+				background-image: url("img.jpg");
+				background-repeat: no-repeat;
+				background-size: cover;
+				opacity: 0.9;
+			}
+			#heading {
+				background: #000;
+				height: 10vh;
+				padding-top: 3.5vh;
+				color: whitesmoke;
+				margin-bottom: 8vh;
+				letter-spacing: 0.8vw;
+				text-align: center;
+			}
+
+			input[type="text"],
+			select,
+			[type="number"],
+			[type="month"] {
+				width: 100%;
+				padding: 25px 12px 12px 0;
+				border: 1px solid #ccc;
+				border-radius: 4px;
+				box-sizing: border-box;
+				resize: vertical;
+			}
+
+			label {
+				padding: 25px 12px 12px 0;
+				display: inline-block;
+			}
+
+			button[type="submit"] {
+				background-color: black;
+				color: white;
+				margin-top: 6vh;
+				margin-left: 25vw;
+				padding: 12px 20px;
+				border: none;
+				border-radius: 4px;
+				cursor: pointer;
+			}
+
+			.container {
+				margin-left: 15vw;
+				margin-right: 15vw;
+				border-radius: 5px;
+				background-color: #f2f2f2;
+				padding: 20px;
+			}
+
+			.ani {
+				float: left;
+				width: 40%;
+				margin-top: 6px;
+				padding-left: 2vw;
+				font-size: 1em;
+			}
+
+			.kab {
+				float: left;
+				width: 40%;
+				margin-top: 6px;
+			}
+
+			.row:after {
+				content: "";
+				display: table;
+				clear: both;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="container">
+			<h2 id="heading">PREDICTIVE ANALYSIS</h2>
+			<form action="{{ url_for('predict')}}" method="post">
+				<div class="row">
+					<div class="ani">
+						<label for="first"><b>Year :</b></label>
+					</div>
+					<div class="kab">
+						<input id="Year" name="Year" required />
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="ani">
+						<label for="second"
+							><b>What Is The Showroom Price? (In lakhs)</b></label
+						>
+					</div>
+					<div class="kab">
+						<input
+							type="number"
+							id="Present_Price"
+							name="Present_Price"
+							required
+						/>
+					</div>
+				</div>
+				<div class="row">
+					<div class="row">
+						<div class="ani">
+							<label for="third"><b>How Many Kilometers Drived?</b></label>
+						</div>
+						<div class="kab">
+							<input
+								type="number"
+								id="Kms_Driven"
+								name="Kms_Driven"
+								required
+							/>
+						</div>
+					</div>
+					<div class="row">
+						<div class="row">
+							<div class="ani">
+								<label for="fourth"
+									><b>How Many Owners Previously Had The Car?</b></label
+								>
+							</div>
+							<div class="kab">
+								<input type="number" id="fourth" name="Owner" required />
+							</div>
+						</div>
+						<div class="row">
+							<div class="ani">
+								<label for="Fuel_Type"><b>What Is The Fuel Type?</b></label>
+							</div>
+							<div class="kab">
+								<select id="Fuel_Type" name="Fuel_Type_Petrol">
+									<option value="Petrol">PETROL</option>
+									<option value="cng">CNG</option>
+									<option value="Diesel">DIESEL</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="ani">
+							<label for="resea"><b>Are You A Dealer Or Individual?</b></label>
+						</div>
+						<div class="kab">
+							<select id="resea" name="Seller_Type_Individual">
+								<option value="Individual">INDIVIDUAL</option>
+								<option value="Dealer">DEALER</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="ani">
+						<label for="research"><b>Transmission Type</b></label>
+					</div>
+					<div class="kab">
+						<select id="research" name="Transmission_Mannual">
+							<option value="Mannual">MANNUAL</option>
+							<option value="Automatic">AUTOMATIC</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="row">
+					<button id = "submit" type="submit">Calculate The Selling Price</button>
+				</div>
+			</form>
+
+			<br><br><h3>{{ prediction_text }}<h3></h3>
+
+		</div>
+	</body>
+</html>
